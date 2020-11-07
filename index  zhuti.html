@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="img/favicon.ico">
+	<title>iWeb在线课堂</title>
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<style>
+		.topbar {
+			width: 100%;
+			height: 29px;
+			line-height: 29px;
+			background: #f9f9f9;
+			border-bottom: 1px solid #eee;
+			text-align: right;
+		}
+		.container {
+			width: 1000px;
+			margin-left: auto;
+			margin-right: auto;
+			border: 1px solid #aaa;	/*仅供测试用*/
+		}
+		.topbar > .container > a,
+		.topbar > .container > span {	/*复杂选择器：> 选择孩子，逗号表示并列选多个*/
+			padding-left: 1em;
+		}
+		.theme {			/*主题色*/
+		}
+		.theme-reverse {	/*主题色的反色*/
+			color: #f60;	
+		}
+		.searchbar {
+			width: 100%;
+			background: #fff;
+		}
+		.searchbar > .container {
+			padding-top: 2em;
+			padding-bottom: 2em;
+		}
+		.search {
+			float: right;  /*搜索条右浮动*/
+			margin-top: 6px;
+		}
+		.search > input {
+			width: 430px;
+			height: 32px;
+			border: 1px solid #ccc;
+			/* 输入框获得焦点时的外围轮廓线 */
+			outline: none;
+			padding-left: .6em;		/*CSS中约定：0.8可简写为.8*/
+			padding-right: .6em;
+			vertical-align: middle; /*行内块元素与同一行中内容竖直对齐*/
+		}
+		.search > .fa-search {
+			background: #57bc4c;
+			color: #fff;
+			font-size: 2.2em;
+			width: 50px;
+			height: 32px;
+			line-height: 32px;	/*文字竖直方向上居中*/
+			text-align: center; /*文字水平方向上居中*/
+			vertical-align: middle; /*行内块元素与同一行中内容竖直对齐*/
+		}
+		.cart-container {
+			/* 修改购物车容器的定位方式，为下拉菜单提供定位参照物，但不脱离文档流 */
+			position: relative;
+			float: right;
+			margin-top: 6px;
+			margin-left: 20px;
+		}
+		.cart {			/*购物车下面没有“下拉菜单”时的样式*/
+			background: #f9f9f9;
+			border: 1px solid #ddd;
+			line-height: 30px;
+			/* 修改光标的样式 */
+			cursor: pointer;
+			position: relative; 
+			z-index: 1;/*只有定位了的元素才能使用z-index*/
+		}
+		.cart.open {	/*购物车下面有“下拉菜单”时的样式*/
+			line-height: 31px;
+			background: #fff;
+			/*border-bottom-color: #fff;  下边框颜色*/
+			border-bottom: none;
+		}
+		.cart > .fa {			/*购物车+小三角*/
+			padding-left: 0.6em;
+			padding-right: 0.6em;
+			color: #57BC4C;
+		}
+		.cart > .caret {		/*小三角的动画基础类*/
+			transform: rotate(0);
+			transition: all  .3s;	/*渐变动画*/
+		}
+		.cart > .caret-rotate {	/*小三角的动画目标类*/
+			transform: rotate(180deg);
+		}
+		.cart-container > .dropdown {		/*下拉菜单不显示时的样式*/
+			position: absolute; /*绝对定位的元素可以处于其他元素上方*/
+			top: 31px;
+			right: 0;	
+			border: 1px solid #ddd;
+			/* padding: 2em  3em  2em  3em;   上右下左*/
+			/* padding: 2em 3em 2em;  上右下，左和右的值相同 */
+			padding: 2em  3em;  /*上右， 下和上相同，左和右相同*/
+			width: 262px;
+			background: #fff;	/*DIV元素的默认背景色为透明色*/
+			display: none;	/* 不显示下拉菜单 */
+		}
+		.cart-container > .dropdown.open {	/*下拉菜单不显示时的样式*/
+			display: block;
+		}
+		
+		.navbar {
+			background: #57BC4C;
+			width: 100%;
+			height: 42px;
+			border-bottom: 2px solid #c1eebd;
+			line-height: 40px;
+			color: #fff;
+			font-size: 1.2em;
+		}
+		
+		.navbar  .menu  li {
+			float: left;	/*让原本的块级元素li全部浮动起来*/
+			padding: 0  1.5em;
+		}
+		.navbar  .menu  li:hover {
+			background: #4AAF3F;
+		}
+		
+		.stary{          /*登录注册背景*/
+			width: 180px;
+			height: 40px;
+			background: #77c558;
+			float: right;
+			text-align: center;
+		}
+		
+		.navbar  .menu  li  a ,
+		.navbar .container  div  a{		/*使用复杂选择器具有更高的优先级*/
+			color: #fff;
+		}
+		
+		.navbar .container  a:hover {
+			color: #e9e958;
+		}
+		
+		.banner{     /*中间的大图片*/
+			width: 100%;
+			height: 380px;
+		
+		}
+		
+		.banner img{
+			width: 100%;
+			height: 380px;
+		}
+		/*.zuo,
+		.you{
+			position: absolute;
+			width: 43px;
+			height: 75px;
+			background: #FFFFFF;
+		}*/
+		.main{
+			width: 1000px;
+			margin: auto;
+		}
+		.play1,
+		.play2{
+			width: 1000px;
+			height: 273.6px;
+		}
+		
+		.paly3{
+			width: 1000px;
+			height: 292px;
+		}
+		
+		.title1{
+			height: 38px;
+			border-bottom: 2px solid #ddd;
+			margin-top: 20px;
+		}
+		.main  .title1  a{
+			float: right;
+		}
+		.coursename{
+			width: 160px;
+			height: 20px;
+			margin-top: 2px;
+			font-size: 1.3em;
+			/* float: left; */
+		}
+		.coursename1{
+			width: 160px;
+			height: 20px;
+			margin-top: 5px;
+			font-size: 1em;
+			text-align: center;
+			color: #999;
+			/* float: left; */
+		}
+		.teacher{
+			width: 160px;
+			height: 20px;
+			margin-top: 5px;
+			font-size: 1em;
+			color: 9999A6;
+		}
+		.teacher1{
+			width: 160px;
+			height: 20px;
+			margin-top: 2px;
+			font-size: 1.2em;
+			text-align: center;
+			/* float: left; */
+		}
+		.pice{
+			width: 160px;
+			height: 20px;
+			margin-top: 5px;
+			font-size: 1.5em;
+			color: #FF6600;
+			font-weight: bold;
+		}
+		.main   li{
+			float: left;
+			padding: 0 1em;
+		}
+	</style>
+</head>
+<body>
+	<!-- 1楼：顶部条 -->
+	<div class="topbar">
+		<div class="container">
+			<a href="#">
+				<span class="fa fa-star"></span>
+				收藏i前端
+			</a>
+			<a href="#">
+				<span class="fa fa-mobile-phone fa-lg"></span>
+				<span class="theme-reverse">下载手机客户端</span>
+			</a>
+			<span>
+				<span class="fa fa-envelope"></span>
+				反馈邮箱：iweb@tedu.cn
+			</span>
+			<span>
+				<span class="fa fa-mobile-phone fa-lg"></span>
+				客服热线：4008-200-200
+			</span>
+		</div>
+	</div>
+
+	<!-- 2楼：搜索条 -->
+	<div class="searchbar">
+		<div class="container">
+			<!-- 1.LOGO -->
+			<img src="img/logo.png" alt="iWeb LOGO">
+			<!-- 3.我的购物车 -->
+			<div class="cart-container" id="myCart">
+				<!-- 购物车：z-index要高于“下拉菜单” -->
+				<div class="cart" id="cart">
+					<span class="fa fa-shopping-cart fa-lg"></span>
+					<span>我的购物车(<b>0</b>)</span>
+					<span class="fa fa-caret-down caret" id="caret"></span>
+				</div>
+				<!-- 下拉菜单 -->
+				<div class="dropdown" id="dropdown">
+					请登录后查看您的购物车
+				</div>
+			</div>
+			
+			<!-- 2.输入框 -->
+			<div class="search">
+				<input type="text" placeholder="课程搜索"><span class="fa fa-search fa-lg"></span>
+			</div>
+		</div>
+	</div>
+
+	<!-- 3楼：导航条 -->
+	<div class="navbar">
+		<div class="container">
+			<!-- 左侧的功能列表 -->
+			<ul class="menu">
+				<li><a href="index.html">首页</a></li>
+				<li><a href="course.html">全部课程</a></li>
+				<li><a href="course.html?tid=1">基础课程</a></li>
+				<li><a href="course.html?tid=2">核心课程</a></li>
+				<li><a href="course.html?tid=3">进阶课程</a></li>
+				<li><a href="teacher.html">名师堂</a></li>
+				<li><a href="school.html">校区</a></li>
+			</ul>
+			<!-- 右侧的登录/注册菜单 -->
+			<div   class="stary">
+				<a href="staryin.html">登录</a>
+				<a href="#">|</a>
+				<a href="staryup.html">注册</a>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 中间的图片 -->
+	<div  class="banner">
+		<img src="img/banner01.jpg" >
+		<span class="zuo"></span>
+		<span class="yuo"></span>
+	</div>
+	
+	<!-- 主体 -->
+	<div class="main">
+		<div class="play1">
+			<h2 class="title1">
+				<span>最新课程</span>
+				<a href="#">更多</a>
+			</h2>
+			<ul >
+				<li>
+					<a href="#"><img src="img/course/01.jpg"></a>
+					<div class="coursename"><a href="#"><span >12-微信小程序开发</span></a></div>
+					<div class="teacher"><span>讲师：程涛</span></div>
+					<div><span class="pice">¥ 599.00</span></div>
+				</li>
+				<li>
+					<a href="#"><img src="img/course/02.jpg" ></a>
+					<div class="coursename"><a href="#"><span >11-Unity地形搭建</span></a></div>
+					<div class="teacher"><span>讲师：张东</span></div>
+					<div><span class="pice">¥ 600.00</span></div>
+				</li>
+				<li>
+					<a href="#"><img src="img/course/03.jpg" ></a>
+					<div class="coursename"><a href="#"><span >10-UI控件之基础控件</span></a></div>
+					<div class="teacher"><span >讲师：李然</span></div>
+					<div><span class="pice">¥ 450.00</span></div>
+				</li>
+				<li>
+					<a href="#"><img src="img/course/04.jpg" ></a>
+					<div class="coursename"><a href="#"><span>09-微信小程序高级</span></a></div>
+					<div class="teacher"><span >讲师：成亮</span></div>
+					<div><span class="pice">¥ 200.00</span></div>
+				</li>
+			</ul>
+		</div>
+		<div class="play2">
+				<h2 class="title1">
+					<span>热门课程</span>
+					<a href="#">更多</a>
+				</h2>
+				<ul >
+					<li>
+						<a href="#"><img src="img/course/04.jpg"></a>
+						<div class="coursename"><a href="#"><span >12-微信小程序开发</span></a></div>
+						<div class="teacher"><span>讲师：程涛</span></div>
+						<div><span class="pice">¥ 200.00</span></div>
+					</li>
+					<li>
+						<a href="#"><img src="img/course/01.jpg" ></a>
+						<div class="coursename"><a href="#"><span >11-Unity地形搭建</span></a></div>
+						<div class="teacher"><span>讲师：张东</span></div>
+						<div><span class="pice">¥ 599.00</span></div>
+					</li>
+					<li>
+						<a href="#"><img src="img/course/06.jpg" ></a>
+						<div class="coursename"><a href="#"><span >10-UI控件之基础控件</span></a></div>
+						<div class="teacher"><span >讲师：李然</span></div>
+						<div><span class="pice">¥ 600.00</span></div>
+					</li>
+					<li>
+						<a href="#"><img src="img/course/05.jpg" ></a>
+						<div class="coursename"><a href="#"><span>09-微信小程序高级</span></a></div>
+						<div class="teacher"><span >讲师：成亮</span></div>
+						<div><span class="pice">¥ 350.00</span></div>
+					</li>
+				</ul>
+		</div>
+		<div class="paly3">
+			<h2 class="title1">
+				<span>名师堂</span>
+				<a href="#">更多</a>
+			</h2>
+			<ul >
+				<li>
+					<a href="#"><img src="img/teacher/cl.jpg"></a>
+					<div class="teacher1"><span >讲师：成亮</span></a></div>
+					<div class="coursename1"><span>主讲：WEB全栈开发</span></div>
+				</li>
+				<li>
+					<a href="#"><img src="img/teacher/lr.jpg" ></a>
+					<div class="teacher1"><a href="#"><span >讲师：李然</span></a></div>
+					<div class="coursename1"><span>主讲：高级网页设计</span></div>
+				</li>
+				<li>
+					<a href="#"><img src="img/teacher/zd.jpg" ></a>
+					<div class="teacher1"><a href="#"><span >讲师：张东</span></a></div>
+					<div class="coursename1"><span >主讲：JS高级编程</span></div>
+				</li>
+				<li>
+					<a href="#"><img src="img/teacher/ct.jpg" ></a>
+					<div class="teacher1"><a href="#"><span>讲师：程涛</span></a></div>
+					<div class="coursename1"><span >主讲：移动APP开发</span></div>
+				</li>
+				<li>
+					<a href="#"><img src="img/teacher/jyx.jpg" ></a>
+					<div class="teacher1"><a href="#"><span>讲师：纪盈鑫</span></a></div>
+					<div class="coursename1"><span >主讲：前端框架开发</span></div>
+				</li>
+			</ul>
+		</div>
+		
+	
+	<script>
+		// 鼠标进入“我的购物车”则后面的小三角开始旋转；离开则转回来
+		myCart.onmouseenter = ()=>{
+			caret.classList.add('caret-rotate')			//caret：小三角   cart：购物车
+			cart.classList.add('open')
+			dropdown.classList.add('open')
+		}
+		myCart.onmouseleave = ()=>{
+			caret.classList.remove('caret-rotate')
+			cart.classList.remove('open')
+			dropdown.classList.remove('open')
+		}
+	</script>
+</body>
+</html>
