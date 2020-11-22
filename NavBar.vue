@@ -4,15 +4,16 @@
 		<div class="wenz">      <!-- 模型盒子 -->
 			<ul class="menu" >    <!-- 列表菜单 -->
 				<li><span>首页</span></li>
-				<li><span id="gs">乌镇概述</span>
+				<li><span id="gs" @mouseenter="Mouseenter()" @mouseleave="Mouseleave()">菜品</span>
 				<div class="dropdown" id="one">
 					<ul class="fenl" >    <!-- 列表菜单 -->
-						<li><span>乌镇渊源</span></li>
-						<li><span>乌镇民俗</span></li>
+						<li><span>中式菜品</span></li>
+						<li><span>西式菜品</span></li>
+						<li><span>饮品</span></li>
 					</ul>
 				</div>
 				</li>
-				<li><span id="dj">度假乌镇</span>
+				<li><span id="dj">餐厅文化</span>
 				<div class="dropdown" id="two">
 					<ul class="fenl" >    <!-- 列表菜单 -->
 						<li><span>美食</span></li>
@@ -21,23 +22,23 @@
 					</ul>
 				</div>
 				</li>
-				<li><span id="wh">文化乌镇</span>
-				<div class="dropdown" id="three">
-					<ul class="fenl" >    <!-- 列表菜单 -->
-						<li><span>乌镇戏剧节</span></li>
-						<li><span>艺术邀请展</span></li>
-					</ul>
-				</div>
-				</li>
-				<li><span id="hz">会展乌镇</span>
-				<div class="dropdown" id="four">
-					<ul class="fenl" >    <!-- 列表菜单 -->
-						<li><span>服务介绍</span></li>
-						<li><span>成功案例</span></li>
-					</ul>
-				</div>
-				</li>
-				<li><span>互动体验</span></li>
+				<!-- <li><span id="wh">文化乌镇</span> -->
+				<!-- <div class="dropdown" id="three"> -->
+					<!-- <ul class="fenl" >     列表菜单 -->
+						<!-- <li><span>乌镇戏剧节</span></li> -->
+						<!-- <li><span>艺术邀请展</span></li> -->
+					<!-- </ul> -->
+				<!-- </div> -->
+				<!-- </li> -->
+				<!-- <li><span id="hz">会展乌镇</span> -->
+				<!-- <div class="dropdown" id="four"> -->
+					<!-- <ul class="fenl" >    列表菜单 -->
+						<!-- <li><span>服务介绍</span></li> -->
+						<!-- <li><span>成功案例</span></li> -->
+					<!-- </ul> -->
+				<!-- </div> -->
+				<!-- </li> -->
+				<!-- <li><span>互动体验</span></li> -->
 				<li><span id="hd">活动广告</span>
 				<div class="dropdown" id="five">
 					<ul class="fenl" >    <!-- 列表菜单 -->
@@ -46,7 +47,8 @@
 					</ul>
 				</div>
 				</li>
-				<li><span>木心美术馆</span></li>
+				<li><span>联系我们</span></li>
+				<li><span>关于我们</span></li>
 			</ul>
 			<!-- 列表下的分类 -->
 			
@@ -55,7 +57,9 @@
 </template>
 
 <script>
-	
+	export default {
+		
+	}
 </script>
 
 <style>
@@ -66,12 +70,10 @@
 		background-color: rgba(128,138,135);
 		cursor: pointer;
 		position: relative;
-		text-decoration: blink;
 	}
 	.wenz{
 		width: 1200px;
 		z-index: 2.5;
-		/* margin-right: 3px; */
 		margin-left:auto;
 		margin-right: auto;
 		
@@ -79,7 +81,7 @@
 	.wenz .menu{
 		color: #FFFFFF;
 		list-style-type: none;
-		margin-left: 300px;
+		margin-left: 600px;
 	}
 	.wenz .menu li{
 		float: left;
